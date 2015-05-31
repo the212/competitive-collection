@@ -258,6 +258,28 @@ module.exports = {
 
     return platedMatch;
 
-  } // end getPlatedMatchOption
+  }, // end getPlatedMatchOption
+
+  getCompanyMatch: function(companyObject) {
+    var companyMatch = [];
+
+    companyObject.competition.forEach(function(element, index) {
+
+        companyMatch.push(element.name);
+        
+        element.leaders.forEach(function(item, i) {
+          companyMatch.push(item.name);
+        });
+
+        element.investors.forEach(function(item, i) {
+          companyMatch.push(item.name);
+        });
+
+    });
+
+    return companyMatch;
+
+  }
+
 
 } // end module export 

@@ -4,6 +4,7 @@ module.exports = function(T, contentMatch) {
   // Matching Keywords ===========================================================
   var cMatch = contentMatch.getContentMatchObject();
   var platedMatch = contentMatch.getPlatedMatchObject();
+  var companyMatch = contentMatch.getCompanyMatch(platedMatch);
 
   // Helper Functions ==============================================================
   function ContainsAny(str, items){
@@ -26,6 +27,10 @@ module.exports = function(T, contentMatch) {
     }
 
     if(ContainsAny(element.text, platedMatch.keywords)){
+      console.log('a[' + index + '] = ' + element.text);
+    }
+
+    if(ContainsAny(element.text, companyMatch)){
       console.log('a[' + index + '] = ' + element.text);
     }
 
