@@ -19,6 +19,10 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 
+// Matching Data ===============================================================
+var contentMatch = require('./app/contentMatch.js');
+
+
 // Twitter API =================================================================
 var Twit = require('twit');
  
@@ -30,7 +34,7 @@ var T = new Twit({
 });
 
 // Twitter Data ================================================================
-require('./app/tweets.js')(T);
+require('./app/tweets.js')(T, contentMatch);
 
 
 // GMAIL =======================================================================
