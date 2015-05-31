@@ -6,13 +6,14 @@ var tweetSchema = mongoose.Schema({
 	tweet_id			: Number,
 	text				: String,
 	t_user_id			: Number,
-	t_user_name			: String,
+	t_screen_name		: String,
 	urls 				: { type : Array , "default" : [] },
 	hashtags			: { type : Array , "default" : [] },
 	user_mentions		: { type : Array , "default" : [] },
 	portfolio_company	: String,
 	competitor			: String,
 	key_words			: { type : Array , "default" : [] },
+	match_type			: String,
 	date_added			: Date
 
 });

@@ -12,27 +12,55 @@ module.exports = function(T, contentMatch) {
           var item = items[i];
           //added toLowerCase for case insensitive
           if (str.toLowerCase().indexOf(item) > -1){
-              return true;
+              return item;
           }
 
       }
       return false;
   }
 
+  function logTweetObject(tweet, matchedWord, matchType) {
+    //console.log(tweet);
+    console.log(tweet.created_at);
+    console.log(tweet.id);
+    console.log(tweet.text);
+    console.log(tweet.user.id);
+    console.log(tweet.user.screen_name);
+
+    //for each url in urls... urls.push(url.expanded_url)
+    console.log(tweet.entities.urls);
+
+    //for each hashtag in hashtags... hashtags.push(hashtag.text)
+    console.log(tweet.entities.hashtags);
+
+    //for each user in mentions... user_mentions.push({ name: user.name, id: user.id })
+    console.log(tweet.entities.user_mentions);
+
+    console.log('Plated');
+
+    //TODO: smart way to figure out competitor
+
+    console.log(matchedWord);
+    console.log(matchType);
+    console.log(new Date());
+
+  }
+
+  function getWordMatch(element, wordArray, matchType) {
+    var matchedWord = ContainsAny(element.text, wordArray);
+    if (matchedWord != false) {
+      logTweetObject(element, matchedWord, matchType);
+    }
+  }
+
   function logArrayElements(element, index, array) {
     //console.log('a[' + index + '] = ' + element.text);
- 
-    if(ContainsAny(element.text, cMatch.growth)){
-      console.log('a[' + index + '] = ' + element.text);
-    }
 
-    if(ContainsAny(element.text, platedMatch.keywords)){
-      console.log('a[' + index + '] = ' + element.text);
-    }
-
-    if(ContainsAny(element.text, companyMatch)){
-      console.log('a[' + index + '] = ' + element.text);
-    }
+    getWordMatch(element, cMatch.product_marketing, 'product_marketing');
+    getWordMatch(element, cMatch.market_funding, 'market_funding');
+    getWordMatch(element, cMatch.status_growth, 'status_growth');
+    getWordMatch(element, platedMatch.keywords, 'keyword');
+    getWordMatch(element, companyMatch, 'competitor_leaders');
 
   }
 

@@ -19,6 +19,11 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 
+// eventEmitter ===============================================================
+var EventEmitter = require("events").EventEmitter;
+var ee = new EventEmitter();
+
+
 // Matching Data ===============================================================
 var contentMatch = require('./app/contentMatch.js');
 
@@ -33,11 +38,15 @@ var T = new Twit({
   	access_token_secret:  'laoNxPKxHA3rTmamRxrrMsMrkm10Q0Uh45TjEdfIheXD6'
 });
 
-// Twitter Data ================================================================
-require('./app/tweets.js')(T, contentMatch);
+ee.on("getNewTwitterData", function () {
+    console.log("event has occured!! get me some new twitter data!!");
+    // Twitter Data ================================================================
+	require('./app/tweets.js')(T, contentMatch);
+});
 
 
 // GMAIL =======================================================================
+/* 
 var Imap = require('imap'),
     inspect = require('util').inspect;
  
@@ -51,7 +60,7 @@ var imap = new Imap({
 
 // GMAIL Data ==================================================================
 require('./app/gmail.js')(imap);
-
+*/
 
 // routes ======================================================================
 require('./app/routes.js')(app);

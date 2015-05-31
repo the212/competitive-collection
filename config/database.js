@@ -1,4 +1,4 @@
 module.exports = {
 
-	url : 'mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu'
+	url : 'mongodb://competitivecollection@gmail.com:Competitivecollection1@proximus.modulusmongo.net:27017/nUsi2nos'
 }

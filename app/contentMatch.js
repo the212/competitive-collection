@@ -2,26 +2,34 @@ module.exports = {
 
   getContentMatchObject: function() {
 
+    //TODO: add different weight to different keywords
     var contentMatch = {
 
-      feature: [
-        "",
-        "",
+      product_marketing: [
+        "exclusive",
+        "feature",
+        "offer",
+        "promotion",
+        "new feature",
+        "now offer",
       ],
 
-      funding: [
-        "",
-        "",
+      market_funding: [
+        "financing",
+        "market size",
+        "raised",
+        "seed round",
+        "series a",
+        "series b",
+        "series c"
       ],
 
-      market: [
-        "",
-        "",
-      ],
-
-      growth: [
+      status_growth: [
+        "followers",
         "hire",
         "hiring",
+        "reached",
+        "users"
       ]
 
     } // end contentMatch object
@@ -224,6 +232,7 @@ module.exports = {
 
       ], //end competition array
 
+      //TODO: add weight to different keywords
       keywords : [
         "build your own meal",
         "chef-made meal",
