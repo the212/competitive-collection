@@ -10,9 +10,14 @@ function getTweets(res){
 		});
 };
 
-module.exports = function(app) {
+module.exports = function(app, ee) {
 
 	// api ---------------------------------------------------------------------
+	app.get('/api/getNewTwitterData', function(req, res) {
+		ee.emit('getNewTwitterData');
+		res.sendfile('./public/success.html');
+	});
+
 	app.get('/api/tweets', function(req, res) {
 
 		getTweets(res);

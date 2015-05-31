@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 // configuration ===============================================================
-mongoose.connect(database.url);
+//mongoose.connect(database.url);
 
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
@@ -63,7 +63,7 @@ require('./app/gmail.js')(imap);
 */
 
 // routes ======================================================================
-require('./app/routes.js')(app);
+require('./app/routes.js')(app, ee);
 
 
 // listen (start app with node server.js) ======================================
