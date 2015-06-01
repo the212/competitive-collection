@@ -19,7 +19,6 @@ module.exports = function(app, ee) {
 	});
 
 	app.get('/api/tweets', function(req, res) {
-
 		getTweets(res);
 	});
 

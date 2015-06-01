@@ -1,3 +1,5 @@
+var Tweet = require('./models/tweet');
+
 // Get Twitter Data ==============================================================
 module.exports = function(T, contentMatch) {
 
@@ -17,52 +19,60 @@ module.exports = function(T, contentMatch) {
 
       }
       return false;
-  }
+  } // end ContainsAny
 
-  function logTweetObject(tweet, matchedWord, matchType) {
+  function saveTweetObject(tweet, matchedWord, matchType) {
     //console.log(tweet);
-    console.log(tweet.created_at);
-    console.log(tweet.id);
-    console.log(tweet.text);
-    console.log(tweet.user.id);
-    console.log(tweet.user.screen_name);
+    var urls_array = [];
+    tweet.entities.urls.forEach(function(element, index) {
+      urls_array.push(element.expanded_url);
+    });
 
-    //for each url in urls... urls.push(url.expanded_url)
-    console.log(tweet.entities.urls);
+    //TODO: tweet.entities.hashtags - for each hashtag in hashtags... hashtags.push(hashtag.text)
+    //TODO: tweet.entities.user_mentions - for each user in mentions... user_mentions.push({ name: user.name, id: user.id })
+    //TODO: smart way to figure out specific competitor
 
-    //for each hashtag in hashtags... hashtags.push(hashtag.text)
-    console.log(tweet.entities.hashtags);
+    var keywords_array = [matchedWord];
+  
+    var t = new Tweet();
 
-    //for each user in mentions... user_mentions.push({ name: user.name, id: user.id })
-    console.log(tweet.entities.user_mentions);
+    t.created_at = tweet.created_at;
+    t.tweet_id = tweet.id;
+    t.text = tweet.text;
+    t.t_user_id = tweet.user.id;
+    t.t_screen_name = tweet.user.screen_name;
+    t.urls = urls_array;
+    //t.hashtags = ;
+    //t.user_mentions = ;
+    t.portfolio_company = 'Plated';
+    t.key_words = keywords_array;
+    t.match_type = matchType;
+    t.date_added = new Date();
 
-    console.log('Plated');
+    t.save(function(err) {
+        if (err)
+            res.send(err);
 
-    //TODO: smart way to figure out competitor
+        console.log('added tweet to db!');
+    });
 
-    console.log(matchedWord);
-    console.log(matchType);
-    console.log(new Date());
-
-  }
+  } // end saveTweetObject
 
   function getWordMatch(element, wordArray, matchType) {
     var matchedWord = ContainsAny(element.text, wordArray);
     if (matchedWord != false) {
-      logTweetObject(element, matchedWord, matchType);
+      saveTweetObject(element, matchedWord, matchType);
     }
-  }
+  } // end getWordMatch
 
   function logArrayElements(element, index, array) {
     //console.log('a[' + index + '] = ' + element.text);
-
     getWordMatch(element, cMatch.product_marketing, 'product_marketing');
     getWordMatch(element, cMatch.market_funding, 'market_funding');
     getWordMatch(element, cMatch.status_growth, 'status_growth');
     getWordMatch(element, platedMatch.keywords, 'keyword');
     getWordMatch(element, companyMatch, 'competitor_leaders');
-
-  }
+  } // end logArrayElements function
 
   /* Search Tweets
   T.get('search/tweets', { q: 'blue apron since:2015-05-29', count: 100 }, function(err, data, response) {
@@ -82,4 +92,4 @@ module.exports = function(T, contentMatch) {
   });
   */
 
-}
+} // end module exports

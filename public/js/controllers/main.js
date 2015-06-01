@@ -1,12 +1,13 @@
 angular.module('compController', [])
 
-	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
+	.controller('mainController', ['$scope','$http','Tweets', function($scope, $http, Tweets) {
 		$scope.loading = true;
 
 		// GET =====================================================================
-		Todos.get()
+		Tweets.get()
 			.success(function(data) {
-				$scope.todos = data;
+				console.log("got tweets!! ", data);
+				$scope.tweets = data;
 				$scope.loading = false;
 			});
 
