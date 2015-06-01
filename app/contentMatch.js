@@ -50,6 +50,7 @@ module.exports = {
           website: '',
           emails: ["blueapron@e.blueapron.com"],
           //TODO: add Linked-In references
+          //TODO: add correct twitter_id and handle
           leaders : [
             {
               name: 'matthew wadiak',
@@ -71,6 +72,7 @@ module.exports = {
             },
           ],
           //TODO: add Linked-In references
+          //TODO: add correct twitter_id and handle
           investors : [
             {
               name: 'first round',

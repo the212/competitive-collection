@@ -74,6 +74,7 @@ module.exports = function(T, contentMatch) {
     getWordMatch(element, companyMatch, 'competitor_leaders');
   } // end logArrayElements function
 
+  //TODO: recursive search for each item in keywords & competitor_leaders
   /* Search Tweets
   T.get('search/tweets', { q: 'blue apron since:2015-05-29', count: 100 }, function(err, data, response) {
     console.log(data);
@@ -86,6 +87,7 @@ module.exports = function(T, contentMatch) {
     data.forEach(logArrayElements);
   });
 
+  //TODO: find suggested users based on keywords and competitor_leaders
   /* Get Suggested Users
   T.get('users/suggestions/:slug', { slug: 'meal kit' }, function (err, data, response) {
     console.log(data)

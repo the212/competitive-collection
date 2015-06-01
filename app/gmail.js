@@ -5,12 +5,15 @@ module.exports = function(imap) {
   }
    
   imap.once('ready', function() {
+
     openInbox(function(err, box) {
       if (err) throw err;
+
       var f = imap.seq.fetch('1:3', {
         bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
         struct: true
       });
+
       f.on('message', function(msg, seqno) {
         console.log('Message #%d', seqno);
         var prefix = '(#' + seqno + ') ';
@@ -30,14 +33,17 @@ module.exports = function(imap) {
           console.log(prefix + 'Finished');
         });
       });
+
       f.once('error', function(err) {
         console.log('Fetch error: ' + err);
       });
+
       f.once('end', function() {
         console.log('Done fetching all messages!');
         imap.end();
       });
     });
+
   });
    
   imap.once('error', function(err) {
